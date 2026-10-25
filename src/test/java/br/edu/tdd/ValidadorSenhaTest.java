@@ -30,4 +30,11 @@ class ValidadorSenhaTest {
         assertFalse(resultado.valida());
         assertEquals(List.of("A senha deve conter pelo menos 2 dígitos"), resultado.erros());
     }
+
+    @Test
+    void deveRejeitarSenhaSemLetraMaiuscula() {
+        ResultadoValidacao resultado = validador.validar("abcde12!");
+        assertFalse(resultado.valida());
+        assertEquals(List.of("A senha deve conter pelo menos uma letra maiuscula"), resultado.erros());
+    }
 }
