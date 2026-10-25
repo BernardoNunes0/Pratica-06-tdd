@@ -37,4 +37,12 @@ class ValidadorSenhaTest {
         assertFalse(resultado.valida());
         assertEquals(List.of("A senha deve conter pelo menos uma letra maiuscula"), resultado.erros());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Abcdef12", "Abcde12 "})
+    void deveRejeitarSenhaSemCaractereEspecial(String senha) {
+        ResultadoValidacao resultado = validador.validar(senha);
+        assertFalse(resultado.valida());
+        assertEquals(List.of("A senha deve conter pelo menos um caractere especial"), resultado.erros());
+    }
 }
