@@ -15,9 +15,13 @@ public class ValidadorSenha {
         if (senha.chars().noneMatch(Character::isUpperCase)) {
             erros.add("A senha deve conter pelo menos uma letra maiuscula");
         }
-        if (senha.chars().noneMatch(c -> !Character.isLetterOrDigit(c) && !Character.isWhitespace(c))) {
+        if (senha.chars().noneMatch(this::ehCaractereEspecial)) {
             erros.add("A senha deve conter pelo menos um caractere especial");
         }
         return new ResultadoValidacao(erros.isEmpty(), erros);
+    }
+    private boolean ehCaractereEspecial(int caractere) {
+        return !Character.isLetterOrDigit(caractere)
+                && !Character.isWhitespace(caractere);
     }
 }
