@@ -12,6 +12,9 @@ public class ValidadorSenha {
         if (senha.chars().filter(Character::isDigit).count() < 2) {
             erros.add("A senha deve conter pelo menos 2 dígitos");
         }
+        if (senha.chars().noneMatch(Character::isUpperCase)) {
+            erros.add("A senha deve conter pelo menos uma letra maiuscula");
+        }
         return new ResultadoValidacao(erros.isEmpty(), erros);
     }
 }
