@@ -22,4 +22,12 @@ class ValidadorSenhaTest {
         assertTrue(resultado.valida());
         assertTrue(resultado.erros().isEmpty());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Abcdefg!", "Abcdef1!"})
+    void deveRejeitarSenhaComMenosDeDoisDigitos(String senha) {
+        ResultadoValidacao resultado = validador.validar(senha);
+        assertFalse(resultado.valida());
+        assertEquals(List.of("A senha deve conter pelo menos 2 dígitos"), resultado.erros());
+    }
 }
